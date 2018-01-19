@@ -35,4 +35,22 @@ init is called when first constructing a neural network object. It will take in 
 
 arguments:
 
-* x: the value to compute the sigmoid value (or 
+* x: the value to compute the sigmoid value (or to compute the derivative of the sigmoid function for).
+* deriv: true if user wants the derivative of the sigmoid function, false if the user wants the regular sigmoid function. deriv is False unless otherwise specified. 
+
+
+The sigmoid function computes the value 1 / (1 + e^-x) or its derivative sigmoid(x) * (1 - sigmoid(x)). The sigmoid function is used as the activation function for the neural network. Each "neuron" accepts as input the outputs of all connected neurons multiplied by their respective weights and computes the value sigmoid(sum) as its output. The derivative is used in backpropegation in order to determain how much change is neccesary. If the value of the derivative is very small (the value of the sigmoid function was either very large or very small) the network was reasonably sure about its output and little change will occur. If the value of the derivative was large (the value of the sigmoid function was around 0.5) the network really was not very sure of its output and therefor lots of change is needed to get the network to "pick" either 0 or 1 for its output.
+
+The following is an image of the sigmoid function.
+
+
+![sigmoid function picture](extra/sigmoid_image.png)
+
+The following is an image of the derivative of the sigmoid function. Notice how near x = 0 the derivative is very large while the sigmoid function is mid range, around 0.5. Conversly, near the two opposite ends of the graph ( x < -2 and x > 2
+
+
+
+
+
+
+
