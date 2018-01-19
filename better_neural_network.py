@@ -150,6 +150,52 @@ class Neural_Network(object):
 					self.weights[weight_layer-1] += [[float(x) for x in line.split(" ")]]
 
 
+	def learn_from_file(self, file_name, classifiers, iterations=100):
+		f = open(file_name)
+		inputs = []
+		outputs = []
+		for line in f:
+			numbers = [float(i) for i in line.split(",")]
+			current_in = []
+			current_out = []
+			for x in range(len(classifiers)):
+				if classifiers[x] == "i":
+					current_in += [numbers[x]]
+				if classifiers[x] == "o":
+					current_out += [numbers[x]]
+			inputs += [current_in]
+			outputs += [current_out]
+		f.close()
+		# print inputs
+		# print outputs
+
+		for i in range(iterations):
+			if i%100 == 0:
+				print i
+			for j in range(len(inputs)):
+				self.train(inputs[j], outputs[j])
+
+	def validate_from_file(self, file_name, classifiers):
+			f = open(file_name)
+			inputs = []
+			outputs = []
+			for line in f:
+				numbers = [float(i) for i in line.split(",")]
+				current_in = []
+				current_out = []
+				for x in range(len(classifiers)):
+					if classifiers[x] == "i":
+						current_in += [numbers[x]]
+					if classifiers[x] == "o":
+						current_out += [numbers[x]]
+				inputs += [current_in]
+				outputs += [current_out]
+			f.close()
+			# print inputs
+			# print outputs
+
+			for j in range(len(inputs)):
+				print "network calculated ", self.get_output(inputs[j]), " correct answer was ", outputs[j]
 
 
 
